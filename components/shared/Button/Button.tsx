@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, oneOf, func } from 'prop-types';
 
 type ButtonProps = {
     children: string;
@@ -13,3 +14,11 @@ export const Button = React.forwardRef(({ children, size, type, className, onCli
         {children}
     </button>
 ));
+
+Button.propTypes = {
+    children: string.isRequired,
+    size: oneOf(['medium', 'small']),
+    type: oneOf(['subtle']),
+    className: string,
+    onClick: func
+};

@@ -13,12 +13,14 @@ export interface TriviaQuestionType {
     question: string;
 }
 
-export interface TriviaData {
-    responseCode: number;
-    results: Array<TriviaQuestionType>;
+export interface TriviaViewProps {
+    data: {
+        responseCode: number;
+        results: Array<TriviaQuestionType>;
+    };
 }
 
-const TriviaView: NextPage = ({ data }: { data: TriviaData }) => {
+const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
     const questions = data.results;
     const [questionCounter, setQuestionCounter] = useState(0);
     const [score, setScore] = useState(0);
@@ -39,8 +41,8 @@ const TriviaView: NextPage = ({ data }: { data: TriviaData }) => {
         if (answer === questions[questionCounter]?.correct_answer) setScore(score + 1);
     };
 
-    const parseQuestion = (question: string) => {
-        return question ? parse(question) : '';
+    const parseQuestion = (question: string): string => {
+        return question ? `${parse(question)}` : '';
     };
 
     return (

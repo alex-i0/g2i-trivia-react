@@ -1,12 +1,13 @@
 import { NextHead, View, Button } from '../components/shared';
 import { CardDirection } from '../components/shared/View/View';
 import Link from 'next/link';
+import { NextPage } from 'next';
 
-type EndgameViewProps = {
-    score: number;
-};
+interface EndgameViewProps {
+    score?: string;
+}
 
-const EndgameView = ({ score }: EndgameViewProps) => {
+const EndgameView: NextPage<EndgameViewProps> = ({ score }) => {
     return (
         <div>
             <NextHead title="Results" />
@@ -26,7 +27,8 @@ const EndgameView = ({ score }: EndgameViewProps) => {
     );
 };
 
-EndgameView.getInitialProps = ({ query: { score } }) => {
+EndgameView.getInitialProps = ({ query }) => {
+    const score = `${query.score}`;
     return { score };
 };
 
