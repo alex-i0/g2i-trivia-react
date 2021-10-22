@@ -19,7 +19,7 @@ button.button-component {
 
     &:focus {
         opacity: 0.8;
-        border: 8px solid #ded3ff;
+        border: 8px solid $border-grayscale;
     }
 
     &.--medium {

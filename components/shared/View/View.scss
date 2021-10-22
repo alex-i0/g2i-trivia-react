@@ -1,6 +1,6 @@
 .view-container {
-    background-color: #d9afd9;
-    background-image: linear-gradient(0deg, #d9afd9 0%, #97d9e1 100%);
+    background-color: $background-color-pink;
+    background-image: $primary-gradient;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -8,7 +8,7 @@
     align-items: center;
 
     .card {
-        background-color: #fff;
+        background-color: $background-color-white;
         filter: drop-shadow(0px 8px 16px rgba(17, 17, 17, 0.04));
         border-radius: 32px;
         padding: 64px;
