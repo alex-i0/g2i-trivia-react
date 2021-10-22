@@ -2,34 +2,44 @@ import { NextHead, View, Button } from '../components/shared';
 import { CardDirection } from '../components/shared/View/View';
 import Link from 'next/link';
 import { NextPage } from 'next';
+import { useContext } from 'react';
+import { Context } from '../context/AppContext';
 
-interface EndgameViewProps {
-    score?: string;
-}
+const EndgameView: NextPage = () => {
+    const {
+        state: { score, answers }
+    } = useContext(Context);
 
-const EndgameView: NextPage<EndgameViewProps> = ({ score }) => {
     return (
         <div>
             <NextHead title="Results" />
             <View cardDirection={CardDirection.vertical}>
                 <div className="container">
-                    <h1 className="heading">You scored:</h1>
-                    <h1 className="heading">{`${score}/10`}</h1>
+                    <div className="heading-container">
+                        <h1 className="heading">You scored:</h1>
+                        <h1 className="heading">{`${score}/10`}</h1>
+                    </div>
 
-                    <Link href="/">
-                        <Button size="medium" type="subtle">
-                            {'Play Again?'}
-                        </Button>
-                    </Link>
+                    <div className="questions-container">
+                        {answers.map(({ question, isCorrect }: { question: string; isCorrect: boolean }) => (
+                            <p className="question">
+                                {isCorrect ? '✅' : '❌'}
+                                {question}
+                            </p>
+                        ))}
+                    </div>
+
+                    <div className="button-container">
+                        <Link href="/">
+                            <Button size="medium" type="subtle">
+                                {'Play Again?'}
+                            </Button>
+                        </Link>
+                    </div>
                 </div>
             </View>
         </div>
     );
-};
-
-EndgameView.getInitialProps = ({ query }) => {
-    const score = `${query.score}`;
-    return { score };
 };
 
 export default EndgameView;

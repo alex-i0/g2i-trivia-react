@@ -1,4 +1,4 @@
-.game-container {
+div.game-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,13 +9,13 @@
     flex-direction: column;
     align-items: center;
 
-    .heading {
+    h1.heading {
         text-align: center;
         flex: 0.2;
         color: $title-active-grayscale;
     }
 
-    .button-group {
+    div.button-group {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -30,14 +30,14 @@
         }
     }
 
-    .question-container {
+    div.question-container {
         width: 292px;
         height: 100px;
         text-align: center;
         flex: 0.6;
     }
 
-    .questions-counter {
+    p.questions-counter {
         flex: 0.1;
         text-align: center;
     }

@@ -1,9 +1,11 @@
 import type { NextPage } from 'next';
 import { NextHead, View, Button } from '../components/shared';
 import { CardDirection } from '../components/shared/View/View';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 import parse from 'html-react-parser';
+import { Context } from '../context/AppContext';
+import { Reducer } from '../reducers/results';
 
 export interface TriviaQuestionType {
     category: string;
@@ -21,24 +23,41 @@ export interface TriviaViewProps {
 }
 
 const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
-    const questions = data.results;
+    const { dispatch } = useContext(Context);
+
     const [questionCounter, setQuestionCounter] = useState(0);
     const [score, setScore] = useState(0);
+    const [answers, setAnswers] = useState([]);
+
     const router = useRouter();
+    const questions = data.results;
 
     useEffect(() => {
         if (questionCounter > questions.length - 1) {
-            router.push({ pathname: '/endgameView', query: { score } });
+            router.push({ pathname: '/endgameView' });
+            const payload = {
+                score,
+                answers
+            };
+            dispatch({
+                type: Reducer.GAME_FINISHED,
+                payload
+            });
         }
     }, [questionCounter]);
 
     const moveToNextQuestion = (answer: TriviaQuestionType['correct_answer']) => {
-        verifyAnswer(answer);
+        verifyAnswerCorectness(answer);
         setQuestionCounter(questionCounter + 1);
     };
 
-    const verifyAnswer = (answer: TriviaQuestionType['correct_answer']) => {
-        if (answer === questions[questionCounter]?.correct_answer) setScore(score + 1);
+    const verifyAnswerCorectness = (answer: TriviaQuestionType['correct_answer']) => {
+        if (answer === questions[questionCounter]?.correct_answer) {
+            setScore(score + 1);
+            setAnswers((results) => [...results, { question: parseQuestion(questions[questionCounter]?.question), isCorrect: true }]);
+        } else {
+            setAnswers((results) => [...results, { question: parseQuestion(questions[questionCounter]?.question), isCorrect: false }]);
+        }
     };
 
     const parseQuestion = (question: string): string => {

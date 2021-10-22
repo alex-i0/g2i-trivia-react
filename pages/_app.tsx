@@ -1,7 +1,12 @@
 import '../scss/main.scss';
 import type { AppProps } from 'next/app';
+import { Provider } from '../context/AppContext';
 
-function MyApp({ Component, pageProps }: AppProps) {
-    return <Component {...pageProps} />;
-}
-export default MyApp;
+const App = ({ Component, pageProps }: AppProps) => {
+    return (
+        <Provider>
+            <Component {...pageProps} />
+        </Provider>
+    );
+};
+export default App;

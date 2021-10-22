@@ -1,4 +1,4 @@
-import { string, oneOf, node } from 'prop-types';
+import { oneOf, node } from 'prop-types';
 
 export enum CardDirection {
     horizontal = 'horizontal',
