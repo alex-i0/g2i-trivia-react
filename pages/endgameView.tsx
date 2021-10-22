@@ -21,8 +21,8 @@ const EndgameView: NextPage = () => {
                     </div>
 
                     <div className="questions-container">
-                        {answers.map(({ question, isCorrect }: { question: string; isCorrect: boolean }) => (
-                            <p className="question">
+                        {answers.map(({ question, isCorrect }: { question: string; isCorrect: boolean }, index: number) => (
+                            <p className="question" key={index}>
                                 {isCorrect ? '✅' : '❌'}
                                 {question}
                             </p>

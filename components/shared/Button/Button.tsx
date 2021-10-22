@@ -9,7 +9,8 @@ type ButtonProps = {
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-export const Button = React.forwardRef(({ children, size, type, className, onClick }: ButtonProps, ref) => (
+export const Button = React.forwardRef<HTMLInputElement, ButtonProps>(({ children, size, type, className, onClick }, ref) => (
+    // @ts-expect-error
     <button className={`button-component --${size} --${type} ${className}`} onClick={onClick} ref={ref}>
         {children}
     </button>

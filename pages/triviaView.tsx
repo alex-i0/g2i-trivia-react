@@ -27,7 +27,7 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
 
     const [questionCounter, setQuestionCounter] = useState(0);
     const [score, setScore] = useState(0);
-    const [answers, setAnswers] = useState([]);
+    const [answers, setAnswers] = useState<Array<{}>>([]);
 
     const router = useRouter();
     const questions = data.results;
@@ -54,10 +54,15 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
     const verifyAnswerCorectness = (answer: TriviaQuestionType['correct_answer']) => {
         if (answer === questions[questionCounter]?.correct_answer) {
             setScore(score + 1);
-            setAnswers((results) => [...results, { question: parseQuestion(questions[questionCounter]?.question), isCorrect: true }]);
+            updateAnswers(true);
         } else {
-            setAnswers((results) => [...results, { question: parseQuestion(questions[questionCounter]?.question), isCorrect: false }]);
+            updateAnswers(false);
         }
+    };
+
+    const updateAnswers = (isCorrect: boolean) => {
+        const question = parseQuestion(questions[questionCounter]?.question);
+        setAnswers((results) => [...results, { question, isCorrect }]);
     };
 
     const parseQuestion = (question: string): string => {

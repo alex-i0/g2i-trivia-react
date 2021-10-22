@@ -1,4 +1,4 @@
-.heading {
+h1.heading {
     width: 343px;
     height: 90px;
     font-family: Poppins;
@@ -22,7 +22,7 @@ p {
     color: $title-active-grayscale;
 }
 
-button {
+button.start-button {
     border: 2px solid $line-grayscale;
     width: 160px;
     height: 64px;
@@ -46,4 +46,20 @@ div.image-container {
 }
 div.text-container {
     flex: 1;
+}
+
+@media only screen and (max-width: $breakpoint-phone) {
+    .heading {
+        max-width: 100%;
+        text-align: center;
+        font-size: 28px;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    button.start-button {
+        min-width: 100%;
+    }
 }

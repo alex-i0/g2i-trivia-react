@@ -11,7 +11,14 @@ const initialState: State = {
     answers: []
 };
 
-const Context = createContext({});
+interface AppContextInterface {
+    state: {
+        score: number;
+        answers: [];
+    };
+}
+
+const Context = createContext<AppContextInterface | {}>({});
 
 const combineReducers =
     (...reducers: any) =>

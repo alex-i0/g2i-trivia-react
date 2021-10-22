@@ -14,7 +14,7 @@ const Home: NextPage = () => {
                     <p>Can you score 100%?</p>
 
                     <Link href="/triviaView">
-                        <Button size="medium" type="subtle">
+                        <Button size="medium" type="subtle" className="start-button">
                             {'Begin'}
                         </Button>
                     </Link>
