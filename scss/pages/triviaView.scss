@@ -1,0 +1,44 @@
+.game-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+
+    .heading {
+        text-align: center;
+        flex: 0.2;
+        color: $title-active-grayscale;
+    }
+
+    .button-group {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 80%;
+
+        button.true {
+            background-color: $success-color;
+        }
+
+        button.false {
+            background-color: $error-color;
+        }
+    }
+
+    .question-container {
+        width: 292px;
+        height: 100px;
+        text-align: center;
+        flex: 0.6;
+    }
+
+    .questions-counter {
+        flex: 0.1;
+        text-align: center;
+    }
+}

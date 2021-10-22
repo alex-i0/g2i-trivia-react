@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff;
+    font-size: 10px;
+
+    a {
+        text-decoration: none;
+    }
+
+    a:visited {
+        color: inherit;
+    }
+
+    button {
+        border: 0;
+        padding: 0.7rem;
+        border-radius: $border-radius;
+        cursor: pointer;
+        outline: none;
+    }
+}

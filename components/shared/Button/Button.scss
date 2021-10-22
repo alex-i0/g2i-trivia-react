@@ -1,0 +1,44 @@
+button.button-component {
+    height: 64px;
+    width: 200px;
+    background-color: $primary-color;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    color: $background-grayscale;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-transform: capitalize;
+
+    &:hover {
+        background-color: $primary-dark-color;
+    }
+
+    &:focus {
+        opacity: 0.8;
+        border: 8px solid #ded3ff;
+    }
+
+    &.--medium {
+        height: 56px;
+    }
+
+    &.--small {
+        height: 40px;
+        width: 120px;
+        font-size: 14px;
+    }
+
+    &.--subtle {
+        color: $primary-color;
+        background-color: transparent;
+        border: 2px solid $line-grayscale;
+
+        &:hover {
+            color: $primary-dark-color;
+        }
+    }
+}

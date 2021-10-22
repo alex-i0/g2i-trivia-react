@@ -1,0 +1,10 @@
+@import './normalize.scss';
+@import './variables.scss';
+@import './core.scss';
+
+@import './pages/index.scss';
+@import './pages/triviaView.scss';
+@import './pages/endgameView.scss';
+
+@import '../components/shared/View/View.scss';
+@import '../components/shared/Button/Button.scss';
