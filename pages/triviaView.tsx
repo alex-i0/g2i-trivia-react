@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import parse from 'html-react-parser';
 import { Context } from '../context/AppContext';
 import { Reducer } from '../reducers/results';
+import { FallbackMessage } from '../components/custom';
 
 export interface TriviaQuestionType {
     category: string;
@@ -23,17 +24,17 @@ export interface TriviaViewProps {
 }
 
 const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
-    const { dispatch } = useContext(Context);
+    const { dispatch } = useContext<any>(Context);
 
     const [questionCounter, setQuestionCounter] = useState(0);
     const [score, setScore] = useState(0);
     const [answers, setAnswers] = useState<Array<{}>>([]);
 
     const router = useRouter();
-    const questions = data.results;
+    const questions = data?.results;
 
     useEffect(() => {
-        if (questionCounter > questions.length - 1) {
+        if (questionCounter > questions?.length - 1) {
             router.push({ pathname: '/endgameView' });
             const payload = {
                 score,
@@ -69,6 +70,9 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
         return question ? `${parse(question)}` : '';
     };
 
+    // Displaying view to communicate error and let user to try again
+    if (data === null) return <FallbackMessage />;
+
     return (
         <div>
             <NextHead title="Game" />
@@ -95,14 +99,15 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
     );
 };
 
-//TODO: Add error handling for API
 export async function getStaticProps() {
-    const res = await fetch(`https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean`);
-    const data = await res.json();
-
-    if (!data) return { notFound: true };
-
-    return { props: { data } };
+    try {
+        const res = await fetch(`https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean`);
+        const data = await res.json();
+        return { props: { data } };
+    } catch (error) {
+        // Handiling API errors
+        return { props: { data: null } };
+    }
 }
 
 export default TriviaView;

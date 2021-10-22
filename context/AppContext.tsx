@@ -1,5 +1,5 @@
 import { useReducer, createContext } from 'react';
-import { results } from '../reducers/results';
+import { Action, results } from '../reducers/results';
 
 export interface State {
     score: number;
@@ -22,7 +22,7 @@ const Context = createContext<AppContextInterface | {}>({});
 
 const combineReducers =
     (...reducers: any) =>
-    (state: State, action: any) => {
+    (state: State, action: Action) => {
         for (let i = 0; i < reducers.length; i++) state = reducers[i](state, action);
         return state;
     };

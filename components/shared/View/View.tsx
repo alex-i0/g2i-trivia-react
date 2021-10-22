@@ -6,7 +6,7 @@ export enum CardDirection {
 }
 
 type ViewProps = {
-    children: any;
+    children: React.ReactNode;
     cardDirection?: CardDirection;
 };
 

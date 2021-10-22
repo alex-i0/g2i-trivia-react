@@ -8,7 +8,7 @@ import { Context } from '../context/AppContext';
 const EndgameView: NextPage = () => {
     const {
         state: { score, answers }
-    } = useContext(Context);
+    } = useContext<any>(Context);
 
     return (
         <div>
