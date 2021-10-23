@@ -7,6 +7,7 @@ import parse from 'html-react-parser';
 import { Context } from '../context/AppContext';
 import { Reducer } from '../reducers/results';
 import { FallbackMessage } from '../components/custom';
+import { number, shape, array } from 'prop-types';
 
 export interface TriviaQuestionType {
     category: string;
@@ -28,7 +29,7 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
 
     const [questionCounter, setQuestionCounter] = useState(0);
     const [score, setScore] = useState(0);
-    const [answers, setAnswers] = useState<Array<{}>>([]);
+    const [answers, setAnswers] = useState<Array<[{ question: string; isCorrect: boolean }]>>([]);
 
     const router = useRouter();
     const questions = data?.results;
@@ -99,7 +100,7 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
     );
 };
 
-export async function getStaticProps() {
+export const getStaticProps = async (): Promise<{ props: { data: Record<any, null> | null } }> => {
     try {
         const res = await fetch(`https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean`);
         const data = await res.json();
@@ -108,6 +109,13 @@ export async function getStaticProps() {
         // Handiling API errors
         return { props: { data: null } };
     }
-}
+};
+
+TriviaView.propTypes = {
+    data: shape({
+        responseCode: number,
+        results: array
+    })
+};
 
 export default TriviaView;

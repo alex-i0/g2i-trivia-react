@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { oneOf, node } from 'prop-types';
 
 export enum CardDirection {

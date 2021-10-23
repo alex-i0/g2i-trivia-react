@@ -30,7 +30,7 @@ const EndgameView: NextPage = () => {
                     </div>
 
                     <div className="button-container">
-                        <Link href="/">
+                        <Link href="/" passHref>
                             <Button size="medium" type="subtle">
                                 {'Play Again?'}
                             </Button>

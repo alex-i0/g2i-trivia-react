@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { string, oneOf, func } from 'prop-types';
 
 type ButtonProps = {
@@ -10,7 +10,7 @@ type ButtonProps = {
 };
 
 export const Button = React.forwardRef<HTMLInputElement, ButtonProps>(({ children, size, type, className, onClick }, ref) => (
-    // @ts-expect-error
+    // @ts-expect-error Ref error is expected
     <button className={`button-component --${size} --${type} ${className}`} onClick={onClick} ref={ref}>
         {children}
     </button>
@@ -18,7 +18,7 @@ export const Button = React.forwardRef<HTMLInputElement, ButtonProps>(({ childre
 
 Button.propTypes = {
     children: string.isRequired,
-    size: oneOf(['medium', 'small']),
+    size: oneOf(['medium', 'small', undefined]),
     type: oneOf(['subtle']),
     className: string,
     onClick: func

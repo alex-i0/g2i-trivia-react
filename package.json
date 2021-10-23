@@ -1,28 +1,40 @@
 {
-  "name": "g2i-trivia-react",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "framer-motion": "^3.1.4",
-    "html-react-parser": "^1.4.0",
-    "isomorphic-unfetch": "^3.0.0",
-    "next": "11.1.2",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "sass": "^1.26.3"
-  },
-  "devDependencies": {
-    "@types/react": "17.0.31",
-    "@typescript-eslint/eslint-plugin": "^4.13.0",
-    "@typescript-eslint/parser": "^4.13.0",
-    "eslint": "7.32.0",
-    "eslint-config-next": "11.1.2",
-    "typescript": "4.4.4"
-  }
+    "name": "g2i-trivia-react",
+    "version": "0.1.0",
+    "author": "Aleksander Karp",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "test": "jest --verbose",
+        "test:watch": "jest --watchAll --verbose",
+        "test:coverage": "jest --verbose --coverage"
+    },
+    "dependencies": {
+        "framer-motion": "^3.1.4",
+        "html-react-parser": "^1.4.0",
+        "next": "11.1.2",
+        "react": "17.0.2",
+        "react-dom": "17.0.2",
+        "sass": "^1.26.3"
+    },
+    "devDependencies": {
+        "@types/enzyme": "^3.10.10",
+        "@types/jest": "^27.0.2",
+        "@types/react": "17.0.31",
+        "@typescript-eslint/eslint-plugin": "^4.13.0",
+        "@typescript-eslint/parser": "^4.13.0",
+        "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
+        "babel-core": "^6.26.3",
+        "babel-jest": "^27.3.1",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-react": "^6.24.1",
+        "eslint": "7.32.0",
+        "eslint-config-next": "11.1.2",
+        "jest": "^27.3.1",
+        "ts-jest": "^27.0.7",
+        "typescript": "^4.4.4"
+    }
 }
