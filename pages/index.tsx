@@ -1,3 +1,4 @@
+import * as React from 'react';
 import type { NextPage } from 'next';
 import { NextHead, View, Button } from '../components/shared';
 import Image from 'next/image';

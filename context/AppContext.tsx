@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useReducer, createContext } from 'react';
 import { Action, results } from '../reducers/results';
 
@@ -18,7 +19,7 @@ interface AppContextInterface {
     };
 }
 
-const Context = createContext<AppContextInterface | {}>({});
+const Context = createContext<AppContextInterface | Record<string, unknown>>({});
 
 const combineReducers =
     (...reducers: any) =>

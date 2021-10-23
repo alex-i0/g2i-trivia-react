@@ -10,7 +10,7 @@ type ButtonProps = {
 };
 
 export const Button = React.forwardRef<HTMLInputElement, ButtonProps>(({ children, size, type, className, onClick }, ref) => (
-    // @ts-expect-error Ref error is expected
+    // @ts-ignore
     <button className={`button-component --${size} --${type} ${className}`} onClick={onClick} ref={ref}>
         {children}
     </button>

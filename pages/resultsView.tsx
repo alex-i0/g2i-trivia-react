@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { NextHead, View, Button } from '../components/shared';
 import { CardDirection } from '../components/shared/View/View';
 import Link from 'next/link';
@@ -5,7 +6,7 @@ import { NextPage } from 'next';
 import { useContext } from 'react';
 import { Context } from '../context/AppContext';
 
-const EndgameView: NextPage = () => {
+const ResultsView: NextPage = () => {
     const {
         state: { score, answers }
     } = useContext<any>(Context);
@@ -42,4 +43,4 @@ const EndgameView: NextPage = () => {
     );
 };
 
-export default EndgameView;
+export default ResultsView;

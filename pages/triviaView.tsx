@@ -1,3 +1,4 @@
+import * as React from 'react';
 import type { NextPage } from 'next';
 import { NextHead, View, Button } from '../components/shared';
 import { CardDirection } from '../components/shared/View/View';
@@ -11,15 +12,15 @@ import { number, shape, arrayOf, string } from 'prop-types';
 
 export interface TriviaQuestionType {
     category: string;
-    correct_answer: 'True' | 'False';
-    difficulty: 'hard';
-    incorrect_answers: Array<'True' | 'False'>;
+    correct_answer: string;
+    difficulty: string;
+    incorrect_answers: Array<string>;
     question: string;
 }
 
 export interface TriviaViewProps {
     data: {
-        responseCode: number;
+        responseCode?: number;
         results: Array<TriviaQuestionType>;
     };
 }
@@ -29,16 +30,16 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
 
     const [questionCounter, setQuestionCounter] = useState(0);
     const [score, setScore] = useState(0);
-    const [answers, setAnswers] = useState<Array<[{ question: string; isCorrect: boolean }]>>([]);
+    const [answers, setAnswers] = useState<Array<{ question: string; isCorrect: boolean }>>([]);
 
     const router = useRouter();
     const questions = data?.results;
 
     useEffect(() => {
-        if (questionCounter > questions?.length - 1) finishGame();
+        if (questionCounter > questions?.length - 1) finishGameAndMoveToResultsPage();
     }, [questionCounter]);
 
-    const finishGame = () => {
+    const finishGameAndMoveToResultsPage = (): void => {
         const payload = {
             score,
             answers
@@ -47,24 +48,24 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
             type: Reducer.GAME_FINISHED,
             payload
         });
-        router.push({ pathname: '/endgameView' });
+        router.push({ pathname: '/resultsView' });
     };
 
-    const moveToNextQuestion = (answer: TriviaQuestionType['correct_answer']) => {
+    const moveToNextQuestion = (answer: TriviaQuestionType['correct_answer']): void => {
         verifyAnswerCorectness(answer);
         setQuestionCounter(questionCounter + 1);
     };
 
-    const verifyAnswerCorectness = (answer: TriviaQuestionType['correct_answer']) => {
+    const verifyAnswerCorectness = (answer: TriviaQuestionType['correct_answer']): void => {
         if (answer === questions[questionCounter]?.correct_answer) {
             setScore(score + 1);
-            updateAnswers(true);
+            updateUserPickedAnswers(true);
         } else {
-            updateAnswers(false);
+            updateUserPickedAnswers(false);
         }
     };
 
-    const updateAnswers = (isCorrect: boolean) => {
+    const updateUserPickedAnswers = (isCorrect: boolean) => {
         const question = parseQuestion(questions[questionCounter]?.question);
         setAnswers((results) => [...results, { question, isCorrect }]);
     };
@@ -118,14 +119,14 @@ TriviaView.propTypes = {
         responseCode: number,
         results: arrayOf(
             shape({
-                category: string,
-                correct_answer: string,
-                difficulty: string,
-                incorrect_answers: arrayOf(string),
-                question: string
-            })
+                category: string.isRequired,
+                correct_answer: string.isRequired,
+                difficulty: string.isRequired,
+                incorrect_answers: arrayOf(string).isRequired,
+                question: string.isRequired
+            }).isRequired
         )
-    })
+    }).isRequired
 };
 
 export default TriviaView;

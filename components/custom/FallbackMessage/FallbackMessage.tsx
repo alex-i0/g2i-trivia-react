@@ -1,3 +1,4 @@
+import * as React from 'react';
 import type { NextPage } from 'next';
 import { NextHead, View, Button } from '../../shared';
 import { CardDirection } from '../../shared/View/View';
