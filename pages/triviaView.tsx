@@ -7,7 +7,7 @@ import parse from 'html-react-parser';
 import { Context } from '../context/AppContext';
 import { Reducer } from '../reducers/results';
 import { FallbackMessage } from '../components/custom';
-import { number, shape, array } from 'prop-types';
+import { number, shape, arrayOf, string } from 'prop-types';
 
 export interface TriviaQuestionType {
     category: string;
@@ -35,18 +35,20 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
     const questions = data?.results;
 
     useEffect(() => {
-        if (questionCounter > questions?.length - 1) {
-            router.push({ pathname: '/endgameView' });
-            const payload = {
-                score,
-                answers
-            };
-            dispatch({
-                type: Reducer.GAME_FINISHED,
-                payload
-            });
-        }
+        if (questionCounter > questions?.length - 1) finishGame();
     }, [questionCounter]);
+
+    const finishGame = () => {
+        const payload = {
+            score,
+            answers
+        };
+        dispatch({
+            type: Reducer.GAME_FINISHED,
+            payload
+        });
+        router.push({ pathname: '/endgameView' });
+    };
 
     const moveToNextQuestion = (answer: TriviaQuestionType['correct_answer']) => {
         verifyAnswerCorectness(answer);
@@ -114,7 +116,15 @@ export const getStaticProps = async (): Promise<{ props: { data: Record<any, nul
 TriviaView.propTypes = {
     data: shape({
         responseCode: number,
-        results: array
+        results: arrayOf(
+            shape({
+                category: string,
+                correct_answer: string,
+                difficulty: string,
+                incorrect_answers: arrayOf(string),
+                question: string
+            })
+        )
     })
 };
 
