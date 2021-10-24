@@ -9,6 +9,7 @@ import { Context } from '../context/AppContext';
 import { Reducer } from '../reducers/results';
 import { FallbackMessage } from '../components/custom';
 import { number, shape, arrayOf, string } from 'prop-types';
+import { Routes } from '../types/navigation';
 
 export interface TriviaQuestionType {
     category: string;
@@ -48,7 +49,7 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
             type: Reducer.GAME_FINISHED,
             payload
         });
-        router.push({ pathname: '/resultsView' });
+        router.push({ pathname: Routes.results });
     };
 
     const moveToNextQuestion = (answer: TriviaQuestionType['correct_answer']): void => {
@@ -90,10 +91,10 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
 
                     <div className="button-group">
                         <Button size="small" className="true" onClick={() => moveToNextQuestion('True')}>
-                            {'True'}
+                            True
                         </Button>
                         <Button size="small" className="false" onClick={() => moveToNextQuestion('False')}>
-                            {'False'}
+                            False
                         </Button>
                     </div>
                     <p className="questions-counter">{questionCounter + 1} of 10</p>

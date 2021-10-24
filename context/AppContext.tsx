@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useReducer, createContext } from 'react';
+import { createContext, useReducer } from 'react';
 import { Action, results } from '../reducers/results';
 
 export interface State {

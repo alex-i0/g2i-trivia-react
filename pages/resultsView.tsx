@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { NextPage } from 'next';
 import { useContext } from 'react';
 import { Context } from '../context/AppContext';
+import { Routes } from '../types/navigation';
 
 const ResultsView: NextPage = () => {
     const {
@@ -31,9 +32,9 @@ const ResultsView: NextPage = () => {
                     </div>
 
                     <div className="button-container">
-                        <Link href="/" passHref>
+                        <Link href={Routes.home} passHref>
                             <Button size="medium" type="subtle">
-                                {'Play Again?'}
+                                Play Again?
                             </Button>
                         </Link>
                     </div>
