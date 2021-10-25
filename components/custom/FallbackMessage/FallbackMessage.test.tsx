@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { FallbackMessage } from './FallbackMessage';
-import { CardDirection } from '../../shared/View/View';
 import { Routes } from '../../../types/navigation';
 
 describe('FallbackMessage Component', () => {
@@ -14,7 +13,7 @@ describe('FallbackMessage Component', () => {
     it('Has a vertical card orientation', () => {
         const cardElement = wrapper.find('.game-container').parent();
 
-        expect(cardElement.props().cardDirection).toBe(CardDirection.vertical);
+        expect(cardElement.props().cardDirection).toBe('vertical');
     });
 
     it('Button redirects to the home page', () => {

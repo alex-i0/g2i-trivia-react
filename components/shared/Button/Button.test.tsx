@@ -4,8 +4,8 @@ import { Button } from './Button';
 
 describe('Button Component', () => {
     const wrapper = shallow(
-        <Button size="small" type="subtle" className="test-button">
-            {'Test'}
+        <Button size="small" buttonType="subtle" className="test-button">
+            Test
         </Button>
     );
 

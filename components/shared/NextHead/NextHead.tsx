@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Head from 'next/head';
-import { string } from 'prop-types';
 
 type NextHeadProps = {
     title: string;
@@ -21,7 +20,3 @@ export const NextHead: React.FC<NextHeadProps> = ({ title }) => (
         <meta name="theme-color" content="#d7e0fd" />
     </Head>
 );
-
-NextHead.propTypes = {
-    title: string.isRequired
-};

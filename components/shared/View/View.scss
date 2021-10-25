@@ -1,5 +1,4 @@
 div.view-container {
-    background-color: $background-color-pink;
     background-image: $primary-gradient;
     width: 100%;
     height: 100vh;
@@ -10,8 +9,8 @@ div.view-container {
 
     div.card {
         background-color: $background-color-white;
-        filter: drop-shadow(0px 8px 16px rgba(17, 17, 17, 0.04));
-        border-radius: 32px;
+        filter: $box-shadow;
+        border-radius: calc($border-radius - 8px);
         padding: 48px;
         display: flex;
     }
@@ -28,7 +27,6 @@ div.view-container {
     div.horizontal {
         width: 840px;
         height: 480px;
-        flex-direction: row;
     }
 }
 
