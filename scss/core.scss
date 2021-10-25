@@ -3,7 +3,9 @@
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: $primary-font;
+    font-style: normal;
+    font-weight: normal;
     background-color: #fff;
     font-size: 10px;
 
