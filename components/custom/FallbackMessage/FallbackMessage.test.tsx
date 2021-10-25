@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { shallow } from 'enzyme';
 import { FallbackMessage } from './FallbackMessage';
 import { Routes } from '../../../types/navigation';

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import type { NextPage } from 'next';
 import { NextHead, View, Button } from '../components/shared';
 import { useState, useEffect } from 'react';
@@ -8,6 +7,7 @@ import { Reducer } from '../reducers/results';
 import { FallbackMessage } from '../components/custom';
 import { Routes } from '../types/navigation';
 import { useAppContext } from '../context/useAppContext';
+import styles from '../scss/pages/triviaView.module.scss';
 
 export interface TriviaQuestionType {
     category: string;
@@ -79,22 +79,22 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
         <>
             <NextHead title="Game" />
             <View cardDirection="vertical">
-                <div className="game-container">
-                    <h1 className="heading">{questions[questionCounter]?.category}</h1>
+                <div className={styles.gameContainer}>
+                    <h1 className={styles.heading}>{questions[questionCounter]?.category}</h1>
 
-                    <div className="question-container">
+                    <div className={styles.questionContainer}>
                         <p>{parseQuestion(questions[questionCounter]?.question)}</p>
                     </div>
 
-                    <div className="button-group">
-                        <Button size="small" className="true" onClick={() => moveToNextQuestion('True')}>
+                    <div className={styles.buttonGroup}>
+                        <Button size="small" className={styles.true} onClick={() => moveToNextQuestion('True')}>
                             True
                         </Button>
-                        <Button size="small" className="false" onClick={() => moveToNextQuestion('False')}>
+                        <Button size="small" className={styles.false} onClick={() => moveToNextQuestion('False')}>
                             False
                         </Button>
                     </div>
-                    <p className="questions-counter">{questionCounter + 1} of 10</p>
+                    <p className={styles.questionsCounter}>{questionCounter + 1} of 10</p>
                 </div>
             </View>
         </>

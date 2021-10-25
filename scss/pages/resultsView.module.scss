@@ -1,3 +1,5 @@
+@import '../variables.scss';
+
 div.container {
     display: flex;
     flex-direction: column;
@@ -5,19 +7,26 @@ div.container {
     align-items: center;
     height: 800px;
     justify-content: space-between;
+    font-family: $primary-font;
+    color: $title-active-grayscale;
 
-    div.heading-container {
+    div.headingContainer {
         flex: 0.2;
         max-height: 100px;
 
         h1.heading {
             text-align: center;
-            margin-bottom: -70px;
             flex: 0.2;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 32px;
+            line-height: 34px;
+            text-align: center;
+            letter-spacing: 1px;
         }
     }
 
-    div.questions-container {
+    div.questionsContainer {
         flex: 0.6;
         max-height: 400px;
         overflow: scroll;
@@ -30,7 +39,7 @@ div.container {
         }
     }
 
-    div.button-container {
+    div.buttonContainer {
         flex: 0.2;
         max-height: 100px;
     }

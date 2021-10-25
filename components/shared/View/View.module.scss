@@ -1,4 +1,6 @@
-div.view-container {
+@import '../../../scss/variables.scss';
+
+div.viewContainer {
     background-image: $primary-gradient;
     width: 100%;
     height: 100vh;
@@ -31,7 +33,7 @@ div.view-container {
 }
 
 @media only screen and (max-width: $breakpoint-phone) {
-    div.view-container {
+    div.viewContainer {
         padding: 10px;
         div.card {
             padding: 24px;

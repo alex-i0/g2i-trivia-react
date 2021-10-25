@@ -1,3 +1,5 @@
+@import '../variables.scss';
+
 h1.heading {
     width: 343px;
     height: 90px;
@@ -8,7 +10,7 @@ h1.heading {
     color: $title-active-grayscale;
 }
 
-p {
+p.subheading {
     width: 284px;
     height: 62px;
     font-size: 18px;
@@ -17,10 +19,10 @@ p {
     color: $title-active-grayscale;
 }
 
-div.image-container {
+div.imageContainer {
     flex: 1;
 }
-div.text-container {
+div.textContainer {
     flex: 1;
 }
 
@@ -31,11 +33,11 @@ div.text-container {
         font-size: 28px;
     }
 
-    p {
+    p.subheading {
         text-align: center;
     }
 
-    button.start-button {
+    button.startButton {
         min-width: 100%;
     }
 }

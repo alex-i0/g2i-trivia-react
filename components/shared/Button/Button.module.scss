@@ -1,11 +1,11 @@
-button.button-component {
+@import '../../../scss/variables.scss';
+
+button.buttonComponent {
     height: 64px;
     width: 200px;
-    background-color: $primary-color;
     border-radius: $border-radius;
     cursor: pointer;
     font-size: 16px;
-    color: $background-grayscale;
     font-weight: 600;
     display: flex;
     justify-content: center;
@@ -13,26 +13,31 @@ button.button-component {
     text-align: center;
     text-transform: capitalize;
 
-    &:hover {
-        background-color: $primary-dark-color;
-    }
-
     &:focus {
         opacity: 0.8;
         border: 8px solid $border-grayscale;
     }
 
-    &.--medium {
+    &.medium {
         height: 56px;
     }
 
-    &.--small {
+    &.small {
         height: 40px;
         width: 120px;
         font-size: 14px;
     }
 
-    &.--subtle {
+    &.primary {
+        background-color: $primary-color;
+        color: $background-grayscale;
+
+        &:hover {
+            background-color: $primary-dark-color;
+        }
+    }
+
+    &.subtle {
         color: $primary-color;
         background-color: transparent;
         border: 2px solid $line-grayscale;
