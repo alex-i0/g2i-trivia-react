@@ -1,21 +1,17 @@
 import * as React from 'react';
 import { NextHead, View, Button } from '../components/shared';
-import { CardDirection } from '../components/shared/View/View';
 import Link from 'next/link';
 import { NextPage } from 'next';
-import { useContext } from 'react';
-import { Context } from '../context/AppContext';
 import { Routes } from '../types/navigation';
+import { useAppContext } from '../context/useAppContext';
 
 const ResultsView: NextPage = () => {
-    const {
-        state: { score, answers }
-    } = useContext<any>(Context);
+    const { score, answers } = useAppContext();
 
     return (
-        <div>
+        <>
             <NextHead title="Results" />
-            <View cardDirection={CardDirection.vertical}>
+            <View cardDirection="vertical">
                 <div className="container">
                     <div className="heading-container">
                         <h1 className="heading">You scored:</h1>
@@ -33,14 +29,14 @@ const ResultsView: NextPage = () => {
 
                     <div className="button-container">
                         <Link href={Routes.home} passHref>
-                            <Button size="medium" type="subtle">
+                            <Button size="medium" buttonType="subtle">
                                 Play Again?
                             </Button>
                         </Link>
                     </div>
                 </div>
             </View>
-        </div>
+        </>
     );
 };
 

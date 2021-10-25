@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Routes } from '../types/navigation';
 
 const Home: NextPage = () => (
-    <div>
+    <>
         <NextHead title="Home" />
         <View>
             <div className="text-container">
@@ -15,7 +15,7 @@ const Home: NextPage = () => (
                 <p>Can you score 100%?</p>
 
                 <Link href={Routes.trivia} passHref>
-                    <Button size="medium" type="subtle" className="start-button">
+                    <Button size="medium" buttonType="subtle" className="start-button">
                         Begin
                     </Button>
                 </Link>
@@ -24,7 +24,7 @@ const Home: NextPage = () => (
                 <Image src="/assets/trivia-rafiki.svg" alt="Picture of Trivia game" width={600} height={600} />
             </div>
         </View>
-    </div>
+    </>
 );
 
 export default Home;

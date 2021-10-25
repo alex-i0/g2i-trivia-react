@@ -1,15 +1,13 @@
 import * as React from 'react';
 import type { NextPage } from 'next';
 import { NextHead, View, Button } from '../components/shared';
-import { CardDirection } from '../components/shared/View/View';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import parse from 'html-react-parser';
-import { Context } from '../context/AppContext';
 import { Reducer } from '../reducers/results';
 import { FallbackMessage } from '../components/custom';
-import { number, shape, arrayOf, string } from 'prop-types';
 import { Routes } from '../types/navigation';
+import { useAppContext } from '../context/useAppContext';
 
 export interface TriviaQuestionType {
     category: string;
@@ -27,7 +25,7 @@ export interface TriviaViewProps {
 }
 
 const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
-    const { dispatch } = useContext<any>(Context);
+    const { dispatch } = useAppContext();
 
     const [questionCounter, setQuestionCounter] = useState(0);
     const [score, setScore] = useState(0);
@@ -53,17 +51,16 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
     };
 
     const moveToNextQuestion = (answer: TriviaQuestionType['correct_answer']): void => {
-        verifyAnswerCorectness(answer);
+        verifyAnswerCorrectness(answer);
         setQuestionCounter(questionCounter + 1);
     };
 
-    const verifyAnswerCorectness = (answer: TriviaQuestionType['correct_answer']): void => {
-        if (answer === questions[questionCounter]?.correct_answer) {
-            setScore(score + 1);
-            updateUserPickedAnswers(true);
-        } else {
-            updateUserPickedAnswers(false);
+    const verifyAnswerCorrectness = (answer: TriviaQuestionType['correct_answer']): void => {
+        const isAnswerCorrect = answer === questions[questionCounter]?.correct_answer;
+        if (isAnswerCorrect) {
+            setScore((prevScore) => ++prevScore);
         }
+        updateUserPickedAnswers(isAnswerCorrect);
     };
 
     const updateUserPickedAnswers = (isCorrect: boolean) => {
@@ -79,9 +76,9 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
     if (data === null) return <FallbackMessage />;
 
     return (
-        <div>
+        <>
             <NextHead title="Game" />
-            <View cardDirection={CardDirection.vertical}>
+            <View cardDirection="vertical">
                 <div className="game-container">
                     <h1 className="heading">{questions[questionCounter]?.category}</h1>
 
@@ -100,11 +97,11 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
                     <p className="questions-counter">{questionCounter + 1} of 10</p>
                 </div>
             </View>
-        </div>
+        </>
     );
 };
 
-export const getStaticProps = async (): Promise<{ props: { data: Record<any, null> | null } }> => {
+export const getStaticProps = async (): Promise<{ props: { data: Record<string, null> | null } }> => {
     try {
         const res = await fetch(`https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean`);
         const data = await res.json();
@@ -113,21 +110,6 @@ export const getStaticProps = async (): Promise<{ props: { data: Record<any, nul
         // Handiling API errors
         return { props: { data: null } };
     }
-};
-
-TriviaView.propTypes = {
-    data: shape({
-        responseCode: number,
-        results: arrayOf(
-            shape({
-                category: string.isRequired,
-                correct_answer: string.isRequired,
-                difficulty: string.isRequired,
-                incorrect_answers: arrayOf(string).isRequired,
-                question: string.isRequired
-            }).isRequired
-        )
-    }).isRequired
 };
 
 export default TriviaView;
