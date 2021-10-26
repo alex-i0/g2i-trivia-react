@@ -1,4 +1,4 @@
-@mixin font($size: 18px, $weight: normal, $line-height: 34px, $letter-spacing: 1, $color: $title-active-grayscale) {
+@mixin font($size: 1.8rem, $weight: normal, $line-height: 3.4rem, $letter-spacing: 0.1rem, $color: $title-active-grayscale) {
     font-family: $primary-font;
     font-style: normal;
     font-weight: $weight;

@@ -1,27 +1,38 @@
-import { shallow } from 'enzyme';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { Button } from './Button';
 
-describe('Button Component', () => {
-    const wrapper = shallow(
-        <Button size="small" buttonType="subtle" className="test-button">
-            Test
-        </Button>
-    );
+describe('Button', () => {
+    afterEach(cleanup);
 
-    it('renders', () => {
-        expect(wrapper.exists()).toBe(true);
+    it('renders a button', () => {
+        //Arrange
+        render(<Button size="small">Test Button</Button>);
+        const button = screen.getByRole('button');
+
+        //Assert
+        expect(button).toBeInTheDocument();
     });
 
-    it('Button recives proper Props', () => {
-        const buttonElement = wrapper.find('button');
+    it('button displays given text', () => {
+        //Arrange
+        const { queryByText, rerender } = render(<Button size="small">Test Button</Button>);
 
-        expect(buttonElement.props().children).toBe('Test');
-        expect(buttonElement.props().className).toContain('--small --subtle test-button');
+        //Assert
+        expect(queryByText('Test Button')).toBeTruthy();
+
+        rerender(<Button>Retest Button</Button>);
+        expect(queryByText('Retest Button')).toBeTruthy();
     });
 
-    it('Button display texts correctly', () => {
-        const buttonElement = wrapper.find('button');
+    it('calls correct function on click', () => {
+        //Arrange
+        const onClick = jest.fn();
+        const { getByRole } = render(<Button onClick={onClick}>OnClick</Button>);
 
-        expect(buttonElement.text()).toBe('Test');
+        //Act
+        fireEvent.click(getByRole('button'));
+
+        //Assert
+        expect(onClick).toHaveBeenCalled();
     });
 });
