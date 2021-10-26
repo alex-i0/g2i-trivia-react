@@ -1,28 +1,19 @@
 @import '../variables.scss';
+@import '../mixins.scss';
+@import '../partials.scss';
 
 div.gameContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     height: 100%;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
-    font-family: $primary-font;
 
     h1.heading {
         width: 300px;
         text-align: center;
         flex: 0.2;
-        color: $title-active-grayscale;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 32px;
-        line-height: 34px;
-        text-align: center;
-        letter-spacing: 1px;
+        @extend %heading;
     }
 
     div.buttonGroup {
@@ -45,23 +36,12 @@ div.gameContainer {
         height: 100px;
         text-align: center;
         flex: 0.6;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 18px;
-        line-height: 34px;
-        text-align: center;
-        letter-spacing: 0.75px;
-        color: #14142b;
+        @extend %subheading;
     }
 
     p.questionsCounter {
         flex: 0.1;
         text-align: center;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 24px;
-        text-align: center;
-        letter-spacing: 0.75px;
-        color: $greyscale-label;
+        @include font(14px, normal, 24px, 0.75px, $greyscale-label);
     }
 }

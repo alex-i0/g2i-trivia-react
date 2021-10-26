@@ -1,0 +1,9 @@
+@import './mixins.scss';
+
+%heading {
+    @include font(32px, bold, 34px, 1px, $title-active-grayscale);
+}
+
+%subheading {
+    @include font(18px, normal, 34px, 0.75px, $title-active-grayscale);
+}

@@ -1,22 +1,17 @@
 @import '../variables.scss';
+@import '../mixins.scss';
+@import '../partials.scss';
 
 h1.heading {
     width: 343px;
     height: 90px;
-    font-weight: bold;
-    font-size: 32px;
-    line-height: 34px;
-    letter-spacing: 1px;
-    color: $title-active-grayscale;
+    @extend %heading;
 }
 
 p.subheading {
     width: 284px;
     height: 62px;
-    font-size: 18px;
-    line-height: 34px;
-    letter-spacing: 0.75px;
-    color: $title-active-grayscale;
+    @extend %subheading;
 }
 
 div.imageContainer {
