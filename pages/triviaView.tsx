@@ -3,8 +3,6 @@ import { NextHead, View, Button } from '../components/shared';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import parse from 'html-react-parser';
-import { Reducer } from '../reducers/results';
-import { FallbackMessage } from '../components/custom';
 import { Routes } from '../types/navigation';
 import { useAppContext } from '../context/useAppContext';
 import styles from '../scss/pages/triviaView.module.scss';
@@ -25,7 +23,7 @@ export interface TriviaViewProps {
 }
 
 const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
-    const { dispatch } = useAppContext();
+    const { setDispatch } = useAppContext();
 
     const [questionCounter, setQuestionCounter] = useState(0);
     const [score, setScore] = useState(0);
@@ -35,16 +33,19 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
     const questions = data?.results;
 
     useEffect(() => {
+        // Displaying view to communicate error and let user to try again
+        if (data === null) router.push({ pathname: Routes.fallback });
+
         if (questionCounter > questions?.length - 1) finishGameAndMoveToResultsPage();
-    }, [questionCounter]);
+    }, [questionCounter, data]);
 
     const finishGameAndMoveToResultsPage = (): void => {
         const payload = {
             score,
             answers
         };
-        dispatch({
-            type: Reducer.GAME_FINISHED,
+        setDispatch?.({
+            type: 'GAME_FINISHED',
             payload
         });
         router.push({ pathname: Routes.results });
@@ -72,18 +73,15 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
         return question ? `${parse(question)}` : '';
     };
 
-    // Displaying view to communicate error and let user to try again
-    if (data === null) return <FallbackMessage />;
-
     return (
         <>
             <NextHead title="Game" />
             <View cardDirection="vertical">
                 <div className={styles.gameContainer}>
-                    <h1 className={styles.heading}>{questions[questionCounter]?.category}</h1>
+                    <h1 className={styles.heading}>{questions?.[questionCounter]?.category}</h1>
 
                     <div className={styles.questionContainer}>
-                        <p>{parseQuestion(questions[questionCounter]?.question)}</p>
+                        <p>{parseQuestion(questions?.[questionCounter]?.question)}</p>
                     </div>
 
                     <div className={styles.buttonGroup}>
@@ -103,6 +101,7 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
 
 export const getStaticProps = async (): Promise<{ props: { data: Record<string, null> | null } }> => {
     try {
+        // Break the link to see the FallbackView
         const res = await fetch(`https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean`);
         const data = await res.json();
         return { props: { data } };

@@ -1,20 +1,19 @@
-import { State } from '../context/AppContext';
+import { State, Answer } from '../context/AppContextProvider';
 
-export enum Reducer {
-    GAME_FINISHED = 'GAME_FINISHED'
-}
+type Reducer = 'GAME_FINISHED';
 
 export type Action = {
     payload: {
         score: number;
-        answers: any;
+        answers: Array<Answer>;
     };
     type: Reducer;
 };
 
 export const results = (state: State, action: Action): State => {
+    console.log(action);
     switch (action.type) {
-        case Reducer.GAME_FINISHED:
+        case 'GAME_FINISHED':
             const { score, answers } = action.payload;
             return { ...state, score, answers };
         default:

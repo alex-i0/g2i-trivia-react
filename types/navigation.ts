@@ -1,5 +1,6 @@
 export enum Routes {
     home = '/',
     results = '/resultsView',
-    trivia = '/triviaView'
+    trivia = '/triviaView',
+    fallback = '/fallbackView'
 }

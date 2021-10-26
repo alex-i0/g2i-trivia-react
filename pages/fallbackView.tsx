@@ -1,16 +1,16 @@
-import { NextHead, View, Button } from '../../shared';
 import Link from 'next/link';
-import { Routes } from '../../../types/navigation';
-import styles from './FallbackMessage.module.scss';
+import styles from '../scss/pages/FallbackView.module.scss';
+import { NextHead, View, Button } from '../components/shared';
+import { Routes } from '../types/navigation';
 
-export const FallbackMessage: React.FC = () => (
+const FallbackView: React.FC = () => (
     <>
         <NextHead title="Troubles" />
         <View cardDirection="vertical">
             <div className={styles.messageContainer}>
                 <h1 className={styles.heading}>Ughh Something Went Wrong</h1>
 
-                <p>In a few minutes try again!</p>
+                <p className={styles.message}>In a few minutes try again!</p>
                 <Link href={Routes.home} passHref>
                     <Button buttonType="subtle">Try Again</Button>
                 </Link>
@@ -18,3 +18,5 @@ export const FallbackMessage: React.FC = () => (
         </View>
     </>
 );
+
+export default FallbackView;
