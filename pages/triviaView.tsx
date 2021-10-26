@@ -1,11 +1,12 @@
+import styles from '../scss/pages/triviaView.module.scss';
+import parse from 'html-react-parser';
 import type { NextPage } from 'next';
 import { NextHead, View, Button } from '../components/shared';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import parse from 'html-react-parser';
 import { Routes } from '../types/navigation';
 import { useAppContext } from '../context/useAppContext';
-import styles from '../scss/pages/triviaView.module.scss';
+import { fetchTriviaQuestions } from '../utils/fetchTriviaQuestions';
 
 export interface TriviaQuestionType {
     category: string;
@@ -99,16 +100,7 @@ const TriviaView: NextPage<TriviaViewProps> = ({ data }) => {
     );
 };
 
-export const getStaticProps = async (): Promise<{ props: { data: Record<string, null> | null } }> => {
-    try {
-        // Break the link to see the FallbackView
-        const res = await fetch(`https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean`);
-        const data = await res.json();
-        return { props: { data } };
-    } catch (error) {
-        // Handiling API errors
-        return { props: { data: null } };
-    }
-};
+// Break the url link to see the FallbackView
+export const getStaticProps = async () => await fetchTriviaQuestions(`https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean`);
 
 export default TriviaView;

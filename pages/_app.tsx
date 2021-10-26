@@ -1,6 +1,6 @@
 import '../scss/main.scss';
-import type { AppProps } from 'next/app';
 import Provider from '../context/AppContextProvider';
+import type { AppProps } from 'next/app';
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => (
     <Provider>
